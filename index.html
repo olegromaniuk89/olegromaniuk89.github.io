@@ -5,17 +5,34 @@
   <title>homelink — your private connection</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    html, body {
+    :root {
+      color-scheme: light dark;
+      --bg-dark: #0d0d0d;
+      --bg-light: #f2f2f2;
+      --text-dark: #ccc;
+      --text-light: #333;
+      --accent-dark: #4fc3f7;
+      --accent-light: #1976d2;
+    }
+
+    body {
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
-      color: #ccc;
       font-family: 'Segoe UI', sans-serif;
-      height: 100%;
+      height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
+      background: var(--bg-dark);
+      color: var(--text-dark);
+      transition: background 0.5s, color 0.5s;
+    }
+
+    @media (prefers-color-scheme: light) {
+      body {
+        background: var(--bg-light);
+        color: var(--text-light);
+      }
     }
 
     .container {
@@ -23,30 +40,63 @@
       animation: fadeIn 2s ease-out;
     }
 
+    .icon {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 1rem;
+      animation: pulse 3s infinite ease-in-out;
+    }
+
     .logo {
       font-size: 2.5rem;
       font-weight: 600;
       letter-spacing: 1px;
-      background: linear-gradient(to right, #ffffff, #4fc3f7);
+      background: linear-gradient(to right, #ffffff, var(--accent-dark));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
+    @media (prefers-color-scheme: light) {
+      .logo {
+        background: linear-gradient(to right, #000000, var(--accent-light));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+
     .tagline {
-      margin-top: 1rem;
+      margin-top: 0.7rem;
       font-size: 1.1rem;
-      color: #777;
       font-style: italic;
+      color: #777;
+    }
+
+    @media (prefers-color-scheme: light) {
+      .tagline {
+        color: #555;
+      }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.85; }
+      50% { transform: scale(1.15); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.85; }
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(30px); }
       to   { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
   <div class="container">
+    <!-- SVG іконка "домик" -->
+    <svg class="icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M32 8L8 28H16V56H28V40H36V56H48V28H56L32 8Z"
+        fill="currentColor" />
+    </svg>
+
     <div class="logo">homelink</div>
     <div class="tagline">your private connection</div>
   </div>
